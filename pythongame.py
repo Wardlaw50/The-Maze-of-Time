@@ -1,0 +1,369 @@
+# ———— Imports
+ 
+import sys  # For exit functions
+import time # For sleep functions
+
+
+
+# ———— Functions
+
+
+# typewriter function
+def typewriter(text, delay):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+# Intro sequence function
+def intro():
+    typewriter(f"\n———————————————————————————————\n  Welcome to {gamename}\n———————————————————————————————", 0.01)
+    time.sleep(1)
+    print("\n ——— Gameplay Information ———", flush=True)
+    time.sleep(0.6)
+    print(" ——— The \">\" symbol indicates when player input is expected.", flush=True)
+    time.sleep(0.6)
+    print(" ——— When answering a riddle, there is no need to write \"a\", \"an\", or \"the\" before your answer.", flush=True)
+    time.sleep(0.6)
+    print(" ——— \"(Y/N)\" inputs accept all of the following:", flush=True)
+    time.sleep(0.6)
+    print(" ——— For yes: (y, Y, yes, Yes, YES)", flush=True)
+    time.sleep(0.6)
+    print(" ——— For no: (n, N, no, No, NO)", flush=True)
+    time.sleep(1.2)
+
+    while True:
+        if input("\n> Press [Enter] to start the game ") == "":
+            break
+
+    time.sleep(0.75)
+    print("\n. ", end="", flush="False")
+    time.sleep(0.75)
+    print(". ", end="", flush="False")
+    time.sleep(0.75)
+    print(".\n", end="", flush="False")
+    time.sleep(0.75)
+
+    typewriter("\nHer parents kissed her goodnight and put her to sleep, but when the morning came, she was gone.", 0)
+    typewriter("No one knew where she had disappeared, only that she had been dreaming for so long trapped in a world between time and shadow.", 0)
+    typewriter("The parents searched endlessly, but no one could give them any answers.", 0)
+    typewriter("People whispered of small cases, others vanishing the same way, but the truth remained hidden.", 0)
+    typewriter("Then, one night, a wanderer came to their door. He spoke of realms beyond dreams, of strange riddles and monsters.", 0)
+    typewriter("Still, no one believed him until he secretly broke into an ancient chamber and uncovered the truth: a hidden doorway \ninto the Maze of Time, the place where their daughter was lost, waiting to be found.", 0)
+    time.sleep(2)
+    typewriter("\nThe wanderer leads you to the rift within the cave. Will you brave the journey ahead to save your daughter?\n", 0)
+
+# function for calling riddles
+def riddle_room(level, path):
+    if level == 1:
+        print("\nThe door creaks to life before bestowing upon you a riddle.")
+        time.sleep(0.75)
+        Response = input("\"I shine in the night but fade in the day. What am I?\"\n> ")
+    elif level == 2:
+        Response = input(f"\nThe wind picks up, carrying {path} thoughts to you. \n\"I follow you everywhere, but disappear in darkness. What am I?\"\n> ")
+    elif level == 3:
+        Response = input("\nCracks in the ground whisper a question to you.\n\"The more you take from me, the bigger I become. What am I?\"\n> ")
+    elif level == 4:
+        if path == "focus":
+            Response = input("\nSummoned by the runes, a stone being emerges with a question.\n\"I have no beginning, no end; I flow forever. What am I?\"\n> ")
+        else:
+            Response = input("\nAfter trial an error, you make out a message.\n\"I have no beginning, no end; I flow forever. What am I?\"\n> ")
+    elif level == 5:
+        Response = input("\n\"I don't exist in darkeness, yet I never cast a shadow. What am I?\"\n> ")
+    elif level == 6: 
+        Response = input("\n\"I speak without a mouth; and vanish when silence falls. What am I?\"\n> ")
+    else:
+        print(f"Unexpected argument value: {level}")
+    return Response.strip().lower().capitalize()
+ 
+# function for when user does NOT want to save their child
+def badParent_exe():
+    print("\n...seriously?? Parents these day... *tut tut*. Very well then.", flush=True)
+    time.sleep(7)
+    print("What are you waiting for? The game to end? Close it yourself.", flush=True)
+    time.sleep(7)
+    print("You know... with (Ctrl + c)?? Hurry up, I don't have all day.", flush=True)
+    time.sleep(7)
+    print("Last chance before I flood your terminal...", flush=True)
+    time.sleep(5)
+    print("3...", end="", flush=True)
+    time.sleep(1)
+    print("2...", end="", flush=True)
+    time.sleep(1)
+    print("1...", end="", flush=True)
+    time.sleep(1)
+    for i in range(2500):
+        print(f"Shame on you, {character.name}. ", end="", flush=True)
+        time.sleep(0.01)
+    sys.exit()      # Exit game
+
+# function for validating Y/N inputs
+def ynCheck(i):             # "i" is short for input. saves time writing if statements.
+    i = i.strip().lower()
+    if i in ("y, yes"):
+        return "yes"
+    elif i in ("n , no"):
+        return "no"         # user has chosen no
+    else:
+        return "undef"      # invalid input
+
+
+# ———— Variables and classes
+ 
+ 
+# Class object for storing player info
+class character:
+    def __init__(self, name, age, item):
+        self.name = name
+        self.age = age
+        self.item = item
+ 
+ 
+# Placeholder value for the player's chosen item
+character.item = "placeholder"
+ 
+ 
+# Variable for game name
+gamename = "The Maze of Time"
+ 
+ 
+ 
+ 
+# ———— Main Code
+
+
+# Get player's Name
+nameInput = input("\n> Enter your name: ")
+nameInput = nameInput.strip().lower().capitalize()
+print(f"So, your name is {nameInput}?")
+while True:
+    nameValid = ynCheck(input("> (Y/N): "))
+    if nameValid == "yes":
+        break
+    elif nameValid == "no":
+        print(f"Okay... {nameInput} is NOT your name then.")
+        nameInput = input("> Please re-enter your name: ")
+        print(f"Is your new name correct, {nameInput}?")
+character.name = nameInput
+    
+# Get Player's Age
+character.age = int(input("> Enter your age: ")) # Get user's age
+if character.age < 18: # Check if user is under 18
+    print("Must be 18 or over to play this game. Goodbye :)")
+    sys.exit()         # Exit game
+
+
+# Call on Intro Seqence function
+intro()
+
+Response = ynCheck(input("> (Yes/No): "))
+while True:
+    if Response == "no":
+        badParent_exe()#
+    elif Response == "yes":
+        break
+    else:
+        Response = ynCheck(input("> (Yes/No): "))
+    
+
+print("\nFueled by adrenaline, you step through the rift and a blinding light envelopes you.") # Pause while being taken to the maze
+time.sleep(0.75)
+print("\n. ", end="", flush="False")
+time.sleep(0.75)
+print(". ", end="", flush="False")
+time.sleep(0.75)
+print(".\n", end="", flush="False")
+time.sleep(0.75)
+ 
+ 
+# Wake up in the maze
+print("\nYou come to your senses and observe the rundown ancient city that has formed around you.\nIn your path lay 2 pedastals, shimmering with energy.\n")
+time.sleep(0.75)
+chapter2 = False
+while chapter2 == False:
+    if input("> Press [Enter] to move ahead ") == "": # User must press ENTER to progress to the pedestals
+        chapter2 = True
+ 
+ 
+# User chooses between the book and the sword
+print("\nUpon the pedestals lie the Book of Wisdom and a Sword of Shadow.\nPick an item to help you on this journey: \n")
+time.sleep(1)
+while character.item not in ("Book of Wisdom, Sword of Shadow"):
+    chosenItem = input("> (Book/Sword): ")
+    if chosenItem.strip().lower() in ["b", "book", "book of wisdom"]:
+        character.item = "Book of Wisdom"
+    elif chosenItem.strip().lower() in ["s", "sword", "sword of shadow"]:
+        character.item = "Sword of Shadow"
+    else:
+        chosenItem = input("> (Book/Sword): ")
+ 
+ 
+# Tell user what they have taken
+if character.item == "Book of Wisdom": # If they have selected the book:
+    print("\nYou have equipped the Book of Wisdom. It glows brightly before bursting into dust; But its presence lingers.")
+else:                        # If they have selected the sword:
+    print("\nYou have selected the Sword of Shadows. But before you can pick it up, it levetates above and around you, holstering itself by your side.")
+ 
+ 
+# First encounter
+print("In the distance you spy a Golden Door and head towards it.\n")
+time.sleep(0.75)
+while True:
+    if input("> Press [Enter] to interact with the Door ") == "":
+        break
+if riddle_room(1, 0) == "Moon":
+    print("\nThe door grumbles.")
+    time.sleep(1.25)
+    typewriter("\"Hmmm... ", 0.1)
+    time.sleep(1.25)
+    typewriter("your answer... ", 0.1)
+    time.sleep(1.25)
+    typewriter("pleases me.\"", 0.1)
+    time.sleep(0.75)
+    print("\nThe door opens and the light disappears. You feel pushed and the door closes behind you.")
+    time.sleep(0.75)
+ 
+ 
+# Second encounter
+print("You enter a grey, misty, and foggy area. You are led across a bridge by blue lanterns which continuously \nreveals the path ahead. The road diverges and you are left with a choice.\nDo you take the left path illuminated by blue lanterns or the right path illuminated by a dull moonlight?\n")
+time.sleep(0.75)
+
+leftOrRight = input("> Pick your path (L/R): ")
+while True:
+    if leftOrRight in ["l", "L", "left", "Left", "LEFT"]:
+        leftOrRight = "L"
+        break
+    elif leftOrRight in ["r", "R", "right", "Right", "RIGHT"]:
+        leftOrRight = "R"
+        break
+    else:
+        leftOrRight = input("> (L/R): ")
+if leftOrRight == "L":
+    path = "their"
+    print("\nYou have taken the left path and follow the lanterns deeper into the forest.\nThe light from the lanterns flicker violently before going dark. Then, as the lanterns ignite once more, you notice markings on the ground.")
+    time.sleep(1)
+    while True:
+        if input("\n> Press [Enter] ") == "":
+            break
+    if character.item == "Book of Wisdom":
+        typewriter("\nYou feel the pressure as the Book of Wisdom seeps knowledge into your head. \nYou begin to recognise the markings on the ground as a holding spell.", 0.05)
+        typewriter("A holding spell that you are right in the center of.\n", 0.08)
+    time.sleep(1)
+    print("The lighting reveals 8 silhouettes surrounding you; They're mimicking you. \nThey spin and whisper before synchronising to give you your next riddle.")
+    time.sleep(0.75)
+    while True:
+        if input("\n> Press [Enter] to hear your silhouettes ") == "":
+            break
+else:
+    path = "Tree's"
+    print("\nYou have taken the right path, curiously following the moonlight until you stumble to a great oak tree.\nAn intimidating but protective presence washes over you.")
+    time.sleep(0.75)
+    while True:
+        if input("\n> Press [Enter] to interact with the Tree ") == "":
+            break
+
+time.sleep(0.45)
+if riddle_room(2, path) == "Shadow":
+    time.sleep(0.75)
+    print("\nYou see some rocks before you at the bottom of the mountain and when you answer the riddle correctly the rocks open up to reveal the entrance to the cave.")
+    while True:
+        if input("\n> Press [Enter] to enter the cave ") == "":
+            break
+    # TO DO: Write about the door opening and going into the next zone
+ 
+ 
+# Third encounter
+print("\nYou step into a wide stone courtyard, empty and silent.")
+time.sleep(0.75)
+print("The ground looks strange... each step you take leaves a deeper mark than the last.")
+time.sleep(0.75)
+ 
+while True:
+    if input("\n> Press [Enter] to inspect the strange ground ") == "":
+        break
+ 
+if riddle_room(3, 0) == "Hole":
+    time.sleep(0.75)
+    print("\nThe floor trembles and forms a perfect circle that opens in the center.")
+    print("Glowing runes spiral into a staircase, leading you safely into the next realm.\n")
+else:
+    print("Wrong!")
+    time.sleep(0.5)
+    print("The floor splits a part in to a vast pit!")
+    print("From the depths rises a beast of dust and stone, roaring as it climbs out to attack!")
+           
+    # TO DO: Write about the door opening and going into the next zone
+ 
+ 
+# Fourth encounter
+print("You descend beneath the earth into a chamber where countless hourglasses float.")
+time.sleep(0.75)
+print("Their sands flow upward and downward at once, and the room pulses like a hidden clock.")
+time.sleep(0.75)
+print("Glowing runes crawl across the walls in endless cycles; beginnings and endings blur together.")
+time.sleep(0.75)
+ 
+while True:
+    if character.item == "Book of Wisdom":  
+        print("The Book's knowledge pierces your mind again and you recognise the powerful magic surrounding you.\nAs it disrupts the flow of time, it projects overlapping thoughts and whispers thoughout the realm.")  
+        if input("\n> Press [Enter] focus on the magic ") == "":
+            path = "focus"
+            break
+    else:
+        if input("\n> Press [Enter] to try to read the runes ") == "":
+            path = "read"
+
+ 
+if riddle_room(4, path) == "Time":
+    print("Correct")
+    time.sleep(0.75)
+    print("\nThe sands freeze, warmth spreads through the chamber, and the ceiling cracks open.")
+    print("Daylight pours in. Time is restored. The Book of paths glows and guides you to the next realm.") # Paths?
+ 
+ 
+# Fifth encounter
+print("You step into a cavern where an underground sea burns with endless fire. The flames shift and swirl like wings beating across the waves.")
+print("But the sea is not water —— it is burning with endless, cold soulfire flames twisting like living serpents.", flush=True)
+time.sleep(0.75)
+print("The pressure grows in the air, and suddenly the fire rises, shaping into a colossal SEA-FIRE DRAGON!", flush=True)
+time.sleep(0.75)
+print("Its horns blaze with embers, its eyes glow like molten gold, and its furnace heart rumbles with power.", flush=True)
+time.sleep(0.75)
+
+if character.item == "Book of Wisdom":
+    print("The book warns you of danger at sunrise. Spend too long by this sea of dormant fire, and the light \nfrom the sun will ignite an endless raging heat, eager to consume you.")
+
+while True:
+    if input("\n> Press [Enter] to face the riddle ") == "":
+        break
+ 
+if riddle_room(5, 0) == "Fire":
+    print("Correct")
+    time.sleep(0.75)
+    print("\nThe dragon lowers its massive head, acknowledging your answer.")
+    print("Its furnace heart softens into golden light, and the flames of the sea rise as wings beneath you.")
+    print("The Sea-Fire Dragon takes flight, carrying you across the burning sea into the next realm.")
+   
+    # TO DO: Write about the door opening and going into the next zone
+ 
+ 
+# Sixth encounter
+print("The passage winds into a shadowy cavern, its walls black and polished like glass.")
+time.sleep(0.75)
+print("Every step you take multiplies in sound —— one becomes ten, then a hundred, until whispers chase you.")
+time.sleep(0.75)
+print("The voices grow louder, filling the chamber as though the walls themselves are speaking.")
+time.sleep(0.75)
+ 
+while True:
+    if input("\n> Press [Enter] to listen to the riddle ") == "":
+        break
+ 
+if riddle_room(6, 0) == "Echo":
+    print("Correct")
+    time.sleep(0.75)
+    print("The whispers twist into screams the cavern walls and shatter.")
+    print("Silver light fills the cavern, mending the black walls around you.")
+    print("The echo lifts you as though on invisible wings , carrying  you to a  final  doorway that  shimmers ahead.")
+    # TO DO: Write about the door opening and going into the next zone
