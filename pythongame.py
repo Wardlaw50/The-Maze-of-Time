@@ -110,7 +110,7 @@ def ynCheck(i):             # "i" is short for input. saves time writing if stat
     else:
         return "undef"      # invalid input
     
-# fight the folden door
+# fight the golden door
 def fightDoor():
     typewriter("\nDread approaches as you realise that your answer was wrong.", 0.01)
     if character.item == "Sword of Shadow":
@@ -586,6 +586,7 @@ else:
     print("Your voice becomes one more echo in the Maze, and the child remains trapped…")
     print("GAME OVER.\n")
     sys.exit()
+
 
 
 
