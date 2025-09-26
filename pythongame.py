@@ -24,6 +24,8 @@ def intro():
     time.sleep(0.6)
     print(" ——— The \">\" symbol indicates when player input is expected.", flush=True)
     time.sleep(0.6)
+    print(" ——— The \"*\" symbol indicates when an item is in use.", flush=True)
+    time.sleep(0.6)
     print(" ——— When answering a riddle, there is no need to write \"a\", \"an\", or \"the\" before your answer.", flush=True)
     time.sleep(0.6)
     print(" ——— \"(Y/N)\" inputs accept all of the following:", flush=True)
@@ -300,7 +302,7 @@ if leftOrRight == "L":
         if input("\n> Press [Enter] ") == "":
             break
     if character.item == "Book of Wisdom":
-        typewriter("\n* You feel the pressure as the Book of Wisdom seeps knowledge into your head. \nYou begin to recognise the markings on the ground as a holding spell.", 0.03)
+        typewriter("\n* You feel pressure as the Book of Wisdom seeps knowledge into your head. \nYou begin to recognise the markings on the ground as a holding spell.", 0.03)
         typewriter("A holding spell that you are right in the center of.\n", 0.08)
     time.sleep(1)
     print("The lighting reveals 8 silhouettes surrounding you; They're mimicking you. \nThey spin and whisper before synchronising to give you your next riddle.")
@@ -323,6 +325,16 @@ if riddle_room(2, path) == "Shadow":
     while True:
         if input("\n> Press [Enter] to enter the cave ") == "":
             break
+else:
+    ("Incorrect.\nYour passage now costs you part of your life.")
+    character.hp -= 1
+    if character.hp < 1:
+        print()
+        typewriter("You Died.\n", 0.2)
+        time.sleep(3)
+        print("Resetting game", flush=True, end="")
+        typewriter(". . .", 0.75)
+        sys.exit()
     # TO DO: Write about the door opening and going into the next zone
 
 
@@ -345,8 +357,21 @@ else:
     time.sleep(0.5)
     print("The floor splits a part in to a vast pit!")
     print("From the depths rises a beast of dust and stone, roaring as it climbs out to attack!")
+    time.sleep(1)
+    typewriter("Your body is pelted with hundreds if not thousands of small rocks and and dust pellets.", 0.01)
+    time.sleep(0.5)
+    character.hp -= 1
+    if character.hp < 1:
+        print()
+        typewriter("You Died.\n", 0.2)
+        time.sleep(3)
+        print("Resetting game", flush=True, end="")
+        typewriter(". . .", 0.75)
+        sys.exit()
+    typewriter("...The pain you feel is spiritual in nature.\nYou are free to go, but you're not the same as you were.", 0.08)
+    typewriter("The stone guardian is gone, and the underground is open for you now.")
            
-    # TO DO: Write about the door opening and going into the next zone
+
  
  
 # Fourth encounter
@@ -359,7 +384,7 @@ time.sleep(0.75)
  
 while True:
     if character.item == "Book of Wisdom":  
-        print("The Book's knowledge pierces your mind again and you recognise the powerful magic surrounding you.\nAs it disrupts the flow of time, it projects overlapping thoughts and whispers thoughout the realm.")  
+        print("* The Book's knowledge pierces your mind again and you recognise the powerful magic surrounding you.\nAs it disrupts the flow of time, it projects overlapping thoughts and whispers thoughout the realm.")  
         if input("\n> Press [Enter] focus on the magic ") == "":
             path = "focus"
             break
@@ -371,9 +396,25 @@ while True:
 if riddle_room(4, path) == "Time":
     print("Correct")
     time.sleep(0.75)
-    print("\nThe sands freeze, warmth spreads through the chamber, and the ceiling cracks open.")
-    print("Daylight pours in. Time is restored. The Book of paths glows and guides you to the next realm.") # Paths?
- 
+    print("\nThe sands freeze, then fall, warmth spreads through the chamber, and the ceiling cracks open.")
+    print("Daylight pours in. Time is restored. The Book of paths glows and guides you to the next realm.") # Paths? #
+else:
+    print("Incorrect.")
+    typewriter("The levitating hourglasses freeze in place, as if offended by your being there.\nThe runes shift, and the aura changes. What was once tranquil is now potent.", 0.01)
+    typewriter("Suddenly, your mind and body as split accross countless places and times.\nHaving been tossed around in a dimension that you were never supposed to see, you lose consciousness.", 0.01)
+    character.hp -= 1
+    if character.hp < 1:
+        print()
+        typewriter("You Died.\n", 0.2)
+        time.sleep(3)
+        print("Resetting game", flush=True, end="")
+        typewriter(". . .", 0.75)
+        sys.exit()
+    else:
+        time.sleep(1)
+        print("By some miracle, your life was spared.")
+        typewriter("Or was it...?", 0.08)
+    
  
 # Fifth encounter
 print("You step into a cavern where an underground sea burns with endless fire. The flames shift and swirl like wings beating across the waves.")
@@ -397,6 +438,22 @@ if riddle_room(5, 0) == "Fire":
     print("\nThe dragon lowers its massive head, acknowledging your answer.")
     print("Its furnace heart softens into golden light, and the flames of the sea rise as wings beneath you.")
     print("The Sea-Fire Dragon takes flight, carrying you across the burning sea into the next realm.")
+else:
+    print("Incorrect.")
+    time.sleep(0.75)
+    typewriter("The Sea-Fire Dragon, who just for a moment seemed dissapointed in your answer, grins as it eyes you up and down.\nIt's jaw unhinges like a snake and it darts towards you faster than you can react.", 0.01)
+    character.hp -= 1
+    if character.hp < 1:
+        typewriter("Passing straight through you, it takes with it what was left of you.", 0.08)
+        print()
+        typewriter("You Died.\n", 0.2)
+        time.sleep(3)
+        print("Resetting game", flush=True, end="")
+        typewriter(". . .", 0.75)
+        sys.exit()
+
+    else:
+        typewriter("Passing straight through you, it takes even more of what it left of your spirit.\nHow much of you is still left in there?", 0.05)
  
 # Sixth encounter
 print("The passage winds into a shadowy cavern, its walls black and polished like glass.")
@@ -416,4 +473,31 @@ if riddle_room(6, 0) == "Echo":
     print("The whispers twist into screams the cavern walls and shatter.")
     print("Silver light fills the cavern, mending the black walls around you.")
     print("The echo lifts you as though on invisible wings , carrying  you to a  final  doorway that  shimmers ahead.")
-    # TO DO: Write about the door opening and going into the next zone
+else:
+    print("Incorrect")
+    typewriter("Silence falls.\nDeep into the cavern you feel a rumbling... and it's defintely not getting further away.", 0.1)
+    time.sleep(0.75)
+    typewriter("Sparks fly and an insurmounrable sound radiates throughout the caverns. The walls crack and and loose rocks fall.", 0.1)
+    character.hp -= 1
+    if character.hp < 1:
+        print()
+        typewriter("You Died.\n", 0.2)
+        time.sleep(3)
+        print("Resetting game", flush=True, end="")
+        typewriter(". . .", 0.75)
+        sys.exit()
+    else:
+        typewriter("Luck is certainly on your side. The crashing stops stops and your body remaain in-tact.", 0.01)
+        print("The whispers twist into screams the cavern walls and shatter.")
+        print("Silver light fills the cavern, mending the black walls around you.")
+        print("The echo lifts you as though on invisible wings , carrying  you to a  final  doorway that  shimmers ahead.")
+
+
+
+# TO DO: You enter the celestial nest
+
+
+# TO DO: You encounter the enemy
+
+
+# TO DO: You save the child
