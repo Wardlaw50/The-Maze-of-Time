@@ -492,12 +492,47 @@ else:
         print("Silver light fills the cavern, mending the black walls around you.")
         print("The echo lifts you as though on invisible wings , carrying  you to a  final  doorway that  shimmers ahead.")
 
+ # ---------- Final Monster Encounter ----------
+print("\nThe cavern shakes as the air splits apart!")
+time.sleep(1)
+print("From the darkness emerges the FINAL MONSTER — the Phantom of Echoes!")
+time.sleep(1.5)
+print("It stares into your soul and whispers...")
+time.sleep(1.5)
+print("\"Every choice is a question… every answer is a wing.\"")
+time.sleep(2)
+
+print("\nThis becomes your clue. You ready your strength for the final battle.\n")
+
+# Simple fight system
+def final_fight():
+    hp_player = 5
+    hp_monster = 6
+    while hp_player > 0 and hp_monster > 0:
+        input("Press [Enter] to strike...")
+        hp_monster -= 1
+        print(f"You strike! Monster HP = {hp_monster}")
+        if hp_monster <= 0:
+            break
+        print("The Phantom attacks!")
+        hp_player -= 1
+        print(f"Your HP = {hp_player}")
+    return hp_player > 0
+
+if final_fight():
+    print("\n✨ You land the final blow! The Phantom shatters into silver dust.")
+    print("You hear your child’s cry — you run forward and rescue them!")
+    print("The Maze of Time collapses behind you as hope is restored forever.")
+    print("YOU WIN!\n")
+else:
+    print("\n💀 The Phantom’s scream consumes you.")
+    print("Your voice becomes one more echo in the Maze, and the child remains trapped…")
+    print("GAME OVER.\n")
+    sys.exit()
 
 
-# TO DO: You enter the celestial nest
 
 
-# TO DO: You encounter the enemy
 
 
-# TO DO: You save the child
+
