@@ -233,6 +233,17 @@ else:                        # If they have selected the sword:
 
 
 # First encounter
+door = ("""
++---------+
+|         |
+|   ___   |
+|  |   |  |
+|  |   |  |
+|  |___|  |
+|         |
++---------+
+""")
+print(door)
 print("In the distance you spy a Golden Door and head towards it.\n")
 time.sleep(0.75)
 while True:
@@ -281,6 +292,17 @@ else:
 
 
 # Second encounter
+Glowinglantern =("""
+   .---.
+  /     \ 
+  | (*) | 
+  |     |
+   \___/
+    | |
+    | | 
+
+""")
+print(Glowinglantern)
 print("You enter a grey, misty, and foggy area. You are led across a bridge by blue lanterns which continuously \nreveals the path ahead. The road diverges and you are left with a choice.\nDo you take the left path illuminated by blue lanterns or the right path illuminated by a dull moonlight?\n")
 time.sleep(0.75)
 
@@ -339,6 +361,15 @@ else:
 
 
 # Third encounter
+largeemptycaveenvironment = ("""
+  /''''''\ 
+ /        \ 
+|          |
+ \        /
+  \______/
+
+""")
+print(largeemptycaveenvironment)
 print("\nYou step into a wide stone courtyard, empty and silent.")
 time.sleep(0.75)
 print("The ground looks strange... each step you take leaves a deeper mark than the last.")
@@ -375,6 +406,15 @@ else:
  
  
 # Fourth encounter
+Floatinghourglasses =("""
+\   /    \   /
+ \ /      \ /
+  X        X
+ / \      / \ 
+/   \    /   \ 
+
+""")
+print(Floatinghourglasses)
 print("You descend beneath the earth into a chamber where countless hourglasses float.")
 time.sleep(0.75)
 print("Their sands flow upward and downward at once, and the room pulses like a hidden clock.")
@@ -417,6 +457,18 @@ else:
     
  
 # Fifth encounter
+FireSeaDragon =("""
+    
+           \||/
+           |  @___oo
+   /---\  / (__,,,,|
+  /        \_(-'  )
+  |      /   \_/\ 
+  |     /      \ \    
+  |  /\/        \ \ 
+  \__/           \_/
+""")
+print(FireSeaDragon)
 print("You step into a cavern where an underground sea burns with endless fire. The flames shift and swirl like wings beating across the waves.")
 print("But the sea is not water —— it is burning with endless, cold soulfire flames twisting like living serpents.", flush=True)
 time.sleep(0.75)
@@ -456,6 +508,11 @@ else:
         typewriter("Passing straight through you, it takes even more of what it left of your spirit.\nHow much of you is still left in there?", 0.05)
  
 # Sixth encounter
+Echo =("""
+~    ~~~    ~~~~~    ~~~   ~
+
+ """)
+print(Echo)
 print("The passage winds into a shadowy cavern, its walls black and polished like glass.")
 time.sleep(0.75)
 print("Every step you take multiplies in sound —— one becomes ten, then a hundred, until whispers chase you.")
@@ -529,6 +586,7 @@ else:
     print("Your voice becomes one more echo in the Maze, and the child remains trapped…")
     print("GAME OVER.\n")
     sys.exit()
+
 
 
 
